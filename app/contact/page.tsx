@@ -80,7 +80,7 @@ export default function ContactPage() {
     e.preventDefault()
     setLoading(true)
 
-    try {   
+    try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -89,8 +89,14 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       })
 
+      const data = await response.json()
+
+      if (data.whatsappUrl) {
+        window.open(data.whatsappUrl, "_blank")
+      }
+
       if (response.ok) {
-        toast("Message sent succuess",{
+        toast("Message sent succuess", {
           description: "Your message has been sent successfully.",
         })
         setFormData({ name: '', email: '', phone: '', message: '' })
@@ -98,7 +104,7 @@ export default function ContactPage() {
         throw new Error('Failed to send message')
       }
     } catch (error) {
-      toast("Failed",{
+      toast("Failed", {
         description: "Failed to send message. Please try again.",
       })
     } finally {
