@@ -1,19 +1,19 @@
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
-import { verifyToken } from "@/lib/auth"
+import { NextRequest, NextResponse } from "next/server"
+import { verifyToken } from "./lib/auth"
 
 export function middleware(req: NextRequest) {
-    const token = req.cookies.get("admin_token")?.value
+    const token = req.cookies.get("auth_token")?.value
 
-    if (req.nextUrl.pathname.startsWith("/admin")) {
-        if (!token || !verifyToken(token)) {
-            return NextResponse.redirect(
-                new URL("/admin/login", req.url)
-            )
-        }
+    if (!token) {
+        return NextResponse.redirect(new URL("/login", req.url))
     }
 
-    return NextResponse.next()
+    try {
+        verifyToken(token)
+        return NextResponse.next()
+    } catch {
+        return NextResponse.redirect(new URL("/login", req.url))
+    }
 }
 
 export const config = {

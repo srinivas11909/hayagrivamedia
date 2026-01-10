@@ -35,10 +35,10 @@ export async function POST(req: Request) {
 
     const token = signToken({ email })
 
-    const res = NextResponse.json({ success: true })
+    const res = NextResponse.json({ success: true , user: { email }})
     res.cookies.set("admin_token", token, {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "lax",
         secure: process.env.NODE_ENV === "production",
         path: "/",
     })

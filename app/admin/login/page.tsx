@@ -3,11 +3,15 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import BrandButton from "@/components/BrandButton"
+import { useRouter } from "next/navigation"
+
 
 export default function AdminLogin() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const router = useRouter()
+
 
     const submit = async (e: any) => {
         e.preventDefault()
@@ -15,15 +19,20 @@ export default function AdminLogin() {
 
         const res = await fetch("/api/auth/login", {
             method: "POST",
+            credentials: "include",
             body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" }
         })
 
         if (!res.ok) {
             setError("Invalid credentials")
             return
         }
-
-        window.location.href = "/admin/dashboard"
+        const data = await res.json()
+        console.log(data)
+        localStorage.setItem("user", JSON.stringify(data.user))
+        sessionStorage.setItem("isLoggedIn", "true")
+        router.push("/admin/dashboard")
     }
 
     return (

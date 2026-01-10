@@ -19,6 +19,9 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
+
+
 
 const items = [
     {
@@ -45,6 +48,21 @@ const items = [
 
 export default function AdminSidebar() {
     const pathname = usePathname()
+    const router = useRouter()
+
+    const logout = async () => {
+        await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+        })
+
+        // Clear client storage
+        localStorage.clear()
+        sessionStorage.clear()
+
+        router.replace("/admin/login")
+    }
+
 
     return (
         <Sidebar>
@@ -88,11 +106,9 @@ export default function AdminSidebar() {
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <a href="/api/auth/logout" className="text-red-500">
+                        <SidebarMenuButton onClick={logout} className="text-red-500">
                                 <LogOut className="h-4 w-4" />
                                 <span>Logout</span>
-                            </a>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
