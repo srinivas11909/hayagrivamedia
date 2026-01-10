@@ -33,15 +33,15 @@ export default function Footer() {
           <h4 className="font-semibold mb-4 text-white">Contact</h4>
           <p className="text-sm text-white">
             📍 India<br />
-            📞 +91 99999 99999<br />
-            ✉ info@highgreevamedia.com
+            📞 +91 90149 70993<br />
+            ✉ hayagrivamedia@gmail.com
           </p>
         </div>
 
       </div>
 
       <div className="text-center text-xs text-gray-500 py-4 border-t border-yellow-500/10">
-        © {new Date().getFullYear()} Highgreeva Media. All rights reserved.
+        © {new Date().getFullYear()} Hayagriva Media. All rights reserved.
       </div>
     </footer>
   )
