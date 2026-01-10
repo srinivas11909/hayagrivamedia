@@ -36,10 +36,10 @@ export default function AdminLogin() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen  flex items-center justify-center">
             <form
                 onSubmit={submit}
-                className="border border-yellow-500/20 p-8 rounded-lg w-96"
+                className="border bg-white border-yellow-500/20 p-8 rounded-lg w-96"
             >
                 <h1 className="text-xl font-bold text-brand-yellow mb-6">
                     Admin Login
