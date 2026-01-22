@@ -2,6 +2,7 @@
 import AdminSidebar from "./AdminSidebar"
 import {
   SidebarProvider,
+  SidebarTrigger ,
   SidebarInset,
 } from "@/components/ui/sidebar"
 import { useEffect } from "react"
@@ -38,6 +39,7 @@ export default function AdminLayout({
     <SidebarProvider>
       <div className="flex min-h-screen bg-background">
         {/* Sidebar */}
+        <SidebarTrigger/>
         <AdminSidebar />
 
         {/* Page Content */}
