@@ -3,18 +3,18 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
-import { Menu } from "lucide-react"
+import { Menu, Home, Info, CalendarDays, Image as ImageIcon, Phone, Icon } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import ThemeToggle from "@/components/ThemeToggle"
 import { usePathname } from "next/navigation"
 
 
 const links = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Events", href: "/events" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/", icon: Home },
+    { name: "About", href: "/about", icon: Info },
+    { name: "Events", href: "/events", icon: CalendarDays },
+    { name: "Gallery", href: "/gallery", icon: ImageIcon },
+    { name: "Contact", href: "/contact", icon: Phone },
 ]
 
 export default function Navbar() {
@@ -64,7 +64,7 @@ export default function Navbar() {
                     <SheetTrigger className="md:hidden">
                         <Menu className="w-6 h-6 text-primary" />
                     </SheetTrigger>
-                    <SheetContent side="left" className="bg-black text-white  w-[85%] sm:w-[380px] p-0 border-l border-white/10">
+                    {/* <SheetContent side="left" className="bg-black text-white  w-[85%] sm:w-[380px] p-0 border-l border-white/10">
                         <nav className="flex flex-col gap-0 mt-10">
                             {links.map(link => (
                                 <Link
@@ -84,7 +84,54 @@ export default function Navbar() {
                                 </Link>
                             ))}
                         </nav>
+                    </SheetContent> */}
+                    <SheetContent
+                        side="left"
+                        className="bg-black text-white w-[85%] sm:w-[380px] p-0 border-l border-white/10"
+                    >
+                        {/* Mobile Logo */}
+                        <div className="px-6 py-4 border-b border-white/10 flex items-center gap-3">
+                            <Image
+                                src="/logo.jpeg"
+                                alt="Hayagriva Media"
+                                width={32}
+                                height={32}
+                            />
+                            <span className="text-lg font-bold text-white">
+                                Hayagriva Media
+                            </span>
+                        </div>
+
+                        {/* Mobile Nav Links */}
+                        <nav className="flex flex-col mt-2">
+                            {links.map(link => {
+                                const Icon = link.icon;
+                                const isActive = pathname === link.href;
+
+                                return (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        onClick={() => setOpen(false)}
+                                        className={`
+            flex items-center gap-4
+            px-6 py-4
+            text-base font-medium
+            transition
+            ${isActive
+                                                ? "bg-yellow-400/10 text-yellow-400"
+                                                : "text-white/80 hover:text-yellow-400 hover:bg-white/5"
+                                            }
+          `}
+                                    >
+                                        <Icon className="w-5 h-5" />
+                                        <span>{link.name}</span>
+                                    </Link>
+                                );
+                            })}
+                        </nav>
                     </SheetContent>
+
                 </Sheet>
 
             </div>
