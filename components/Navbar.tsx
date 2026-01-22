@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react"
 import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import ThemeToggle from "@/components/ThemeToggle"
@@ -18,9 +19,10 @@ const links = [
 
 export default function Navbar() {
     const pathname = usePathname()
+    const [open, setOpen] = useState(false)
 
     return (
-        <header className="sticky top-0 z-50 bg-background border-b border-border">
+        <header className="sticky top-0 z-50 bg-black border-b border-white/10">
             <div className="container flex items-center justify-between h-16">
 
                 {/* Logo */}
@@ -33,7 +35,7 @@ export default function Navbar() {
                         height={36}
                         priority
                     />
-                    <span className="text-lg font-bold text-primary">
+                    <span className={`text-lg font-bold text-primary`}>
                         Hayagriva Media
                     </span>
                 </Link>
@@ -47,8 +49,8 @@ export default function Navbar() {
                                 key={link.name}
                                 href={link.href}
                                 className={`text-sm font-medium transition ${isActive
-                                        ? "text-primary border-b-2 border-primary pb-1"
-                                        : "text-foreground hover:text-primary"
+                                    ? "text-yellow-400 border-b-2 border-yellow-400 pb-1"
+                                    : "text-white/80 hover:text-yellow-400"
                                     }`}
                             >
                                 {link.name}
@@ -58,17 +60,25 @@ export default function Navbar() {
                 </nav>
 
                 {/* Mobile Nav */}
-                <Sheet>
+                <Sheet open={open} onOpenChange={setOpen}>
                     <SheetTrigger className="md:hidden">
                         <Menu className="w-6 h-6 text-primary" />
                     </SheetTrigger>
-                    <SheetContent side="right" className="bg-black text-white">
+                    <SheetContent side="left" className="bg-black text-white  w-[85%] sm:w-[380px] p-0 border-l border-white/10">
                         <nav className="flex flex-col gap-0 mt-10">
                             {links.map(link => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg hover:text-brand-yellow p-3"
+                                    className="
+                                        px-6 py-2
+                                        text-lg font-medium
+                                        text-white/80
+                                        hover:text-yellow-400
+                                        hover:bg-white/5
+                                        transition
+                                        "
+                                    onClick={() => setOpen(false)}
                                 >
                                     {link.name}
                                 </Link>

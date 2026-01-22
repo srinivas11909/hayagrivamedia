@@ -200,6 +200,12 @@
   }
 }
 
+:root:not(.dark) .section-subtitle {
+  color: oklch(0.1 0 0); /* pure black */
+}
+:root:not(.dark) header .text-primary {
+  color: lab(85.1213% 13.1041 79.5681); /* force white */
+}
 /* ===== Highgreeva Layout System ===== */
 
 .container {
@@ -230,3 +236,19 @@
   color: oklch(0.75 0 0);
 }
 
+/* ===== FORCE SAME HEADER STYLE IN LIGHT & DARK ===== */
+header,
+.navbar,
+.site-header {
+  background-color: oklch(0.08 0 0); /* same as dark background */
+  color: oklch(0.98 0 0);
+}
+
+header a,
+.navbar a {
+  color: oklch(0.98 0 0);
+}
+
+header a:hover {
+  color: oklch(0.87 0.17 85); /* brand yellow hover */
+}
