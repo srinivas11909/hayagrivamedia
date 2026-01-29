@@ -46,6 +46,7 @@ export default function AdminLayout({
         <SidebarInset className="p-8">
           {children}
         </SidebarInset>
+        <Toaster  richColors position="top-right" duration={3000}/>
 
       </div>
     </SidebarProvider>
