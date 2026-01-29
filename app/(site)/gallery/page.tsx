@@ -1,12 +1,15 @@
 import { connectDB } from "@/lib/db"
 import Gallery from "@/models/Gallery"
 import GalleryClient from "@/components/GalleryClient"
+import { unstable_noStore as noStore } from "next/cache"
+
 
 export const metadata = {
   title: "Gallery | Highgreeva Media",
 }
 
 export default async function GalleryPage() {
+  noStore()
   await connectDB()
   const images = await Gallery.find().sort({ createdAt: -1 }).lean()
   const safeImages = images.map((img: any) => ({
