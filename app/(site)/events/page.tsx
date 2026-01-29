@@ -1,6 +1,8 @@
 import Image from "next/image"
 import { connectDB } from "@/lib/db"
 import Event from "@/models/Event"
+import { unstable_noStore as noStore } from "next/cache"
+
 
 export const metadata = {
   title: "Events | Highgreeva Media",
@@ -8,8 +10,11 @@ export const metadata = {
 }
 
 export default async function EventsPage() {
+  noStore()
   await connectDB()
   const events = await Event.find().sort({ createdAt: -1 }).lean()
+
+  console.log(events)
 
   return (
     <section className="section">
