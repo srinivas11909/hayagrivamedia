@@ -158,7 +158,7 @@ export default function AdminGallery() {
       body: JSON.stringify({ id }),
     })
 
-    fetchGallery()
+    await fetchGallery()
   }
 
   const saveEdit = async () => {
@@ -175,7 +175,7 @@ export default function AdminGallery() {
     })
 
     setEditing(null)
-    fetchGallery()
+   await fetchGallery()
   }
 
   const addImage = async () => {
@@ -196,7 +196,7 @@ export default function AdminGallery() {
     setCaption("")
     setCategory("Wedding")
 
-    fetchGallery()
+    await fetchGallery()
   }
 
 
@@ -220,7 +220,7 @@ export default function AdminGallery() {
       body: JSON.stringify({ image, category, caption }),
     })
     setImage("")
-    fetchGallery()
+    await fetchGallery()
   }
 
 

@@ -141,17 +141,28 @@ export default function AdminEvents() {
 
   const createEvent = async () => {
     if (!title || !image) {
-      toast.error("Title & Image required")
+      toast.error("Title & Image required", { position: "top-right" })
       return
     }
 
     setLoading(true)
-    await fetch("/api/events", {
+    const res = await fetch("/api/events", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ title, image }),
+      cache: "no-store",
     })
 
-    toast.success("Event added")
+
+    if (!res.ok) {
+      throw new Error("Failed to create event")
+    }
+
+    const newEvent = await res.json()
+
+    toast.success("Event added successfully 🎉", { position: "top-right" })
     setTitle("")
     setImage("")
     setLoading(false)
@@ -167,18 +178,18 @@ export default function AdminEvents() {
       body: JSON.stringify(editing),
     })
 
-    toast.success("Event updated")
+    toast.success("Event updated", { position: "top-right" })
     setEditing(null)
     setLoading(false)
-    fetchEvents()
+    await fetchEvents()
   }
 
   const deleteEvent = async (id: string) => {
     if (!confirm("Delete this event?")) return
 
     await fetch(`/api/events/${id}`, { method: "DELETE" })
-    toast.success("Event deleted")
-    fetchEvents()
+    toast.success("Event deleted", { position: "top-right" })
+    await fetchEvents()
   }
 
   return (
@@ -199,6 +210,7 @@ export default function AdminEvents() {
 
         <Input
           type="file"
+          value={image}
           onChange={e =>
             uploadImage(e.target.files![0], setImage)
           }
