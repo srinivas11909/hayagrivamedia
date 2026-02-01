@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Hayagriva Media",
+  icons: {
+    icon: "/favicon.ico",
+  },
   description: "Hayagriva Media is a premium cinematic event management and media production agency creating unforgettable weddings, corporate events, films, and visual stories.",
 
   keywords: [
