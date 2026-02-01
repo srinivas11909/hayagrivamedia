@@ -52,6 +52,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube, YoutubeIcon } from 'lucide-react'
+import { FaPinterestP } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6"
 
 const footerLinks = {
   services: [
@@ -72,16 +74,11 @@ const footerLinks = {
   ],
 }
 
-const XIcon = () => (
-  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M4 3h16c.6 0 1 .4 1 1v16c0 .6-.4 1-1 1H4c-.6 0-1-.4-1-1V4c0-.6.4-1 1-1zm9.5 10.2l4.2-6.2H16l-3.2 4.8L10 7h-1.7l4.3 6.5-4.3 6.5H9l3.3-4.9 3.4 4.9h1.6l-4.3-6.3z" />
-  </svg>
-);
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://facebook.com/', label: 'Facebook' },
+  { icon: FaPinterestP, href: 'https://in.pinterest.com/hayagrivamedia/', label: 'Pinterest' },
   { icon: Instagram, href: 'https://www.instagram.com/hayagriva_media', label: 'Instagram' },
-  { icon: XIcon, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: FaXTwitter, href: 'https://x.com', label: 'X' },
   { icon: Youtube, href: 'https://www.youtube.com/@hayagrivamedia', label: 'YouTube' },
 ]
 
